@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div class="row pb-2 pt-3">
+    <app-search
+      (onSearch)="onSearch($event)"
+    ></app-search>
+  </div>
+
+  <div class="row">
+    <app-list
+      [total]="total$ | async"
+      [filtered]="filtered$ | async"
+      [favorites]="favorites$ | async"
+      [showFavorites]="showFavorites$ | async"
+      (onScrollUpdate)="onScrollUpdate($event)"
+      (onSelect)="onSelect($event)"
+      (onToggle)="onToggleFavorite($event)"
+    ></app-list>
+  </div>
+</div>
