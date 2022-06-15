@@ -17,8 +17,15 @@
          (scrolledUp)="onUp()"
     >
       <div class="col-12 pb-3 pt-3 border-top" *ngFor="let book of _filtered">
-        <strong>TITLE: </strong> {{book.volumeInfo.title}}<br/>
-        <a role="button" class="btn" [ngClass]="book.favorite ? 'btn-warning' : 'btn-success'" (click)="toggleFavorites(book)">{{book.favorite ? 'Remove from favorites' : 'Add to favorites'}}</a>
+        <div class="d-flex justify-content-between">
+                            <span class="d-flex flex-column">
+                                <span><strong>TITLE: </strong> {{book.volumeInfo.title}}</span>
+                                <span><strong>AUTHORS: </strong> {{book.volumeInfo.authors}}</span>
+                            </span>
+          <span class="d-flex">
+            <a role="button" class="btn d-inline float-right" [ngClass]="book.favorite ? 'btn-warning' : 'btn-success'" (click)="toggleFavorites(book)">{{book.favorite ? 'Remove from favorites' : 'Add to favorites'}}</a>
+          </span>
+        </div>
       </div>
     </div>
   </div>

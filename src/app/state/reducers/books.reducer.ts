@@ -98,6 +98,7 @@ export const getBooks = createSelector(getBookState, state  => state.books);
 export const getError = createSelector(getBookState, state => state.error);
 export const getShowFavorites = createSelector(getBookState, state => state.showFavorites);
 export const getFavorites = createSelector(getBookState, state => state.favourites)
+export const getLoading = createSelector(getBookState, state => state.loading)
 export const getFiltered = createSelector(getBooks, getFavorites, getShowFavorites, (books, favourites, show) => {
     return books && books.length ? [...books].filter(book => show ? favourites.indexOf(book.id) !== -1 : book) : []
   }

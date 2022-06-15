@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import {RouterModule} from "@angular/router";
 import {PresentationsModule} from "../../presentations/presentations.module";
+import {NgxSpinnerModule} from "ngx-spinner";
 
 
 
@@ -13,6 +14,7 @@ import {PresentationsModule} from "../../presentations/presentations.module";
   imports: [
     CommonModule,
     PresentationsModule,
+    NgxSpinnerModule,
     RouterModule.forChild([
       {
         path: '',
@@ -20,6 +22,8 @@ import {PresentationsModule} from "../../presentations/presentations.module";
       }
     ]),
 
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
 })
 export class HomeModule { }

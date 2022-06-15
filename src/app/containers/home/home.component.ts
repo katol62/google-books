@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {getBooks, getFavorites, getFiltered, getShowFavorites, getTotal, IBooksState} from "../../state/reducers/books.reducer";
+import {getBooks, getFavorites, getFiltered, getLoading, getShowFavorites, getTotal, IBooksState} from "../../state/reducers/books.reducer";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {Book} from "../../services/google-books.service";
 import {addFavorite, booksLoad, booksReset, ISearchPayload, removeFavorite, showFavorites} from "../../state/actions/book.actions";
 import {IScroll} from "../../presentations/list/list.component";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-home',
@@ -17,10 +18,16 @@ export class HomeComponent implements OnInit {
   total$: Observable<number> = this.store.select(getTotal);
   favorites$: Observable<string[]> = this.store.select(getFavorites);
   showFavorites$: Observable<boolean> = this.store.select(getShowFavorites);
+  loading$: Observable<boolean> = this.store.select(getLoading);
   // search$: Observable<ISearchPayload> = this.store.select(getSearch);
   search: ISearchPayload = {q: '', startIndex: 0, maxResults: 30};
+  showLoading: boolean = false;
 
-  constructor(private store: Store<IBooksState>) { }
+  constructor(private store: Store<IBooksState>) {
+    this.loading$.subscribe(
+      value => this.showLoading = value
+    )
+  }
 
   ngOnInit(): void {
     this.store.dispatch(booksLoad({payload: this.search}))

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {EMPTY, Observable} from "rxjs";
 import {ISearchPayload} from "../state/actions/book.actions";
 
 export interface Book {
@@ -8,6 +8,8 @@ export interface Book {
   volumeInfo?: {
     title: string;
     subtitle: string;
+    authors: [string];
+    description: string;
   },
   favorite?: boolean;
 }
@@ -31,6 +33,9 @@ export class GoogleBooksService {
   }
 
   public getBooks( search: ISearchPayload ): Observable<any> {
+    if (!search.q || search.q === '') {
+      return EMPTY
+    }
     let params = new HttpParams().append('key', this.key).append('q',search.q).append('startIndex', search.startIndex).append('maxResults', search.maxResults)
     return this.http.get(this.API_PATH, {params: params})
   }

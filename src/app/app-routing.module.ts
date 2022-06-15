@@ -3,10 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'list',
+    path: '',
+    pathMatch: 'full',
     loadChildren: () => import('./containers/home/home.module').then(m => m.HomeModule)
   },
-
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];
 
 @NgModule({
